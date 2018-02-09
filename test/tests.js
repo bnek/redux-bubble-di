@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import { DiContainer } from "bubble-di";
 import { createStore, applyMiddleware } from "redux";
-import reduxBubbleDi from "../src/index";
+import reduxBubbleDi, { bubble } from "../src/index";
 
 class FakesStore {
     dispatch(action) {
@@ -72,6 +72,21 @@ describe("BubbleDiMiddleWare", () => {
 
         newStore.dispatch({ type: "foo" });
         expect(nextCalled).to.be.true;
+    });
+
+    it("bubble function should create valid bubble action", () => {
+        diContainer.register("MyDependency", { dependencies: [], factoryMethod: () => new MyDependency() });
+        let injectionMethodCalled = false;
+        const testBubble = bubble(
+            (dispatch, myDependency) => {
+                injectionMethodCalled = true;
+                expect(dispatch).to.not.be.undefined;
+                expect(myDependency).to.not.be.undefined;
+            },
+            ["myDependency"],
+        );
+        middleWare(fakeStore)(nextDummy)(testBubble);
+        expect(injectionMethodCalled).to.be.true;
     });
 });
 

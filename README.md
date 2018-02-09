@@ -40,13 +40,13 @@ const store = createStore(
     applyMiddleware(reduxBubbleDi(DiContainer.getContainer())),
 );
 
-const bubbleAction = {
-    bubble: (dispatch, myService) => {
+const bubbleAction = bubble(
+    (dispatch, myService) => {
         myService.backendCall();
         dispatch({ type: "someReduxAction" });
     },
-    dependencies: ["MyServiceDependency"],
-};
+    ["MyServiceDependency"],
+);
 
 store.dispatch(bubbleAction);
 

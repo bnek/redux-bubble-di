@@ -1,6 +1,6 @@
 import { DiContainer } from "bubble-di";
 import { createStore, applyMiddleware } from "redux";
-import reduxBubbleDi from "../src/index";
+import reduxBubbleDi, { bubble } from "../src/index";
 
 class MyServiceDependency {
     backendCall() {
@@ -19,15 +19,15 @@ describe("Working Example", () => {
             applyMiddleware(reduxBubbleDi(DiContainer.getContainer())),
         );
 
-        const bubbleAction = {
-            bubble: (dispatch, myService) => {
+        const bubbleAction = bubble(
+            (dispatch, myService) => {
                 myService.backendCall();
                 // ...
                 dispatch({ type: "someReduxAction" });
                 // ...
             },
-            dependencies: ["MyServiceDependency"],
-        };
+            ["MyServiceDependency"],
+        );
 
         store.dispatch(bubbleAction);
     });

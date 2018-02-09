@@ -22,6 +22,13 @@ export default function reduxBubbleDi(bubbleDiContainer = DiContainer.getContain
     };
 }
 
+export function bubble(bubbleFunction, dependencies) {
+    return {
+        bubble: bubbleFunction,
+        dependencies,
+    };
+}
+
 function resolveArgs(action, bubbleDiContainer) {
     let dependencies = action.dependencies;
     if (dependencies === undefined) {
