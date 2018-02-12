@@ -1,6 +1,6 @@
 {
   "name": "redux-bubble-di",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Redux Middleware that injects dependencies into asynch action creators.",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
@@ -26,9 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KoBoldSystems/redux-bubble-di.git"
+    "url": "https://github.com/bnek/redux-bubble-di.git"
   },
-  "homepage": "https://github.com/KoBoldSystems/redux-bubble-di",
+  "homepage": "https://github.com/bnek/redux-bubble-di",
   "keywords": [
     "redux",
     "dependency",
